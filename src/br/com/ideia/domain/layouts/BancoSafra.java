@@ -20,15 +20,13 @@ public class BancoSafra extends AbstractBanco implements Banco{
 	public String geraCodigoDeBarrasPara(Boleto boleto) {
 		Beneficiario beneficiario = boleto.getBeneficiario();
 		
-		StringBuilder campoLivre = new StringBuilder("7");
-		campoLivre.append(getAgenciaFormatado(beneficiario));
-		campoLivre.append(beneficiario.getDigitoAgencia());
-		campoLivre.append(getCodigoBeneficiarioFormatado(beneficiario));
-		//campoLivre.append(beneficiario.getDigitoCodigoBeneficiario());
-		campoLivre.append(getNossoNumeroFormatado(beneficiario));
-		campoLivre.append("2"); // Cobrança registrada
+		StringBuilder campoLivre = new StringBuilder();
+		campoLivre.append(getAgenciaFormatado(beneficiario));//Agencia
+		campoLivre.append(beneficiario.getDigitoAgencia());// Digito agencia
+		campoLivre.append(getCodigoBeneficiarioFormatado(beneficiario));// Conta 9 Digitos
+		campoLivre.append(getNossoNumeroFormatado(beneficiario)); //Nosso Numero com 9 Digitos
+		campoLivre.append("2"); // Não sei do que se trata
 		
-		System.out.println(campoLivre.toString());
 		return new CodigoDeBarrasBuilder(boleto).comCampoLivre(campoLivre);
 	}
 
