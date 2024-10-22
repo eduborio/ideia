@@ -135,6 +135,8 @@ public class ProcessadorTxt {
 			if(boleto.getNumeroBanco().equals("001") || boleto.getNumeroBanco().equals("104") )
 				boleto.setConvenioBB         ( campos[56] );
 			
+			boleto.setParcela         ( campos[57] );
+			
 		}catch (Exception e) {
 			System.out.println(campos[33]);
 			e.printStackTrace();

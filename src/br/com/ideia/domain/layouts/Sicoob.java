@@ -19,21 +19,32 @@ public class Sicoob extends AbstractBanco implements Banco{
 
 	@Override
 	public String geraCodigoDeBarrasPara(Boleto boleto) {
+		
 		Beneficiario beneficiario = boleto.getBeneficiario();
 		StringBuilder campoLivre = new StringBuilder();
-		campoLivre.append(beneficiario.getCarteira());
+		campoLivre.append(getCarteiraFormatado(beneficiario));
+		System.out.println(getCarteiraFormatado(beneficiario));
+		
 		campoLivre.append(getAgenciaFormatado(beneficiario));
+		System.out.println(getAgenciaFormatado(beneficiario));
+		
 		campoLivre.append(getModalidadeFormatado(beneficiario));
-		campoLivre.append(getCodigoBenefFormatado(beneficiario));
-		campoLivre.append(beneficiario.getDigitoCodigoBeneficiario());
+		System.out.println(getModalidadeFormatado(beneficiario));
+		
+		campoLivre.append(getCodigoBeneficiarioFormatado(beneficiario));
+		System.out.println(getCodigoBeneficiarioFormatado(beneficiario));
+		
 		campoLivre.append(getNossoNumeroFormatado(beneficiario));
+		System.out.println(getNossoNumeroFormatado(beneficiario));
+		
 		campoLivre.append(numeroDaParcelaFormatado(boleto));
+		System.out.println(numeroDaParcelaFormatado(boleto));
 		//System.out.println(campoLivre.toString());
 		return new CodigoDeBarrasBuilder(boleto).comCampoLivre(campoLivre);
 	}
 	
 	private Object numeroDaParcelaFormatado(Boleto boleto) {
-		return leftPadWithZeros("1",3);
+		return leftPadWithZeros(boleto.getDescricoes().get(0),3);
 	}
 
 	private String getAgenciaFormatado(Beneficiario beneficiario) {
@@ -46,16 +57,12 @@ public class Sicoob extends AbstractBanco implements Banco{
 
 	@Override
 	public String getCarteiraFormatado(Beneficiario benef) {
-		return benef.getCarteira();
+		return benef.getCarteira().substring(0,1);
 	}
 	
-	private String getCodigoBenefFormatado(Beneficiario beneficiario) {
-		return leftPadWithZeros(beneficiario.getCodigoBeneficiario(),7);
-	}
-
 	@Override
 	public String getCodigoBeneficiarioFormatado(Beneficiario benef) {
-		return benef.getCodigoBeneficiario();
+		return leftPadWithZeros(benef.getCodigoBeneficiario(),7) + benef.getDigitoCodigoBeneficiario();
 	}
 
 	@Override

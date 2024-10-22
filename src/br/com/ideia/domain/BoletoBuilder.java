@@ -117,6 +117,23 @@ public class BoletoBuilder {
 				.comDocumento( info.getCnpjBeneficiario() )
 				.comNossoNumero(nossoNumero+info.getDigitoNossoNumero())
 				;
+			
+		} else if(info.getNumeroBanco().equals("756")){
+			
+			localDePagamento = info.getLocalPagamento();
+			
+			beneficiario = Beneficiario.novoBeneficiario()
+				.comAgencia(info.getAgencia())
+				.comDigitoAgencia(info.getDigitoAgencia())
+				.comCodigoBeneficiario(info.getNumeroConta())
+				.comDigitoCodigoBeneficiario(info.getDigitoConta())
+				.comCarteira(info.getCarteira())
+				.comEndereco(endEmpresa)
+				.comNomeBeneficiario( info.getBeneficiario() )
+				.comDocumento( info.getCnpjBeneficiario() )
+				.comNossoNumero(nossoNumero)
+				.comDigitoNossoNumero(info.getDigitoNossoNumero())
+				;	
 		     
 		}else if(info.getNumeroBanco().equals("237")) {
 		 	
@@ -237,7 +254,10 @@ public class BoletoBuilder {
 				.comValorBoleto(info.getValorTitulo())
 				.comNumeroDoDocumento(info.getNumeroFatura())
 				.comInstrucoes(info.getInstrucao1(),info.getInstrucao2(),info.getInstrucao3())
-				.comLocaisDePagamento(localDePagamento);
+				.comLocaisDePagamento(localDePagamento)
+				.comDescricoes(info.getParcela())
+				;
+		
 		
 		return new BoletoAdapter(info, boleto);
 		

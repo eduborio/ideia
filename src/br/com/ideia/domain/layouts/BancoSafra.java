@@ -20,7 +20,7 @@ public class BancoSafra extends AbstractBanco implements Banco{
 	public String geraCodigoDeBarrasPara(Boleto boleto) {
 		Beneficiario beneficiario = boleto.getBeneficiario();
 		
-		StringBuilder campoLivre = new StringBuilder();
+		StringBuilder campoLivre = new StringBuilder("7");
 		campoLivre.append(getAgenciaFormatado(beneficiario));//Agencia
 		campoLivre.append(beneficiario.getDigitoAgencia());// Digito agencia
 		campoLivre.append(getCodigoBeneficiarioFormatado(beneficiario));// Conta 9 Digitos
@@ -41,7 +41,7 @@ public class BancoSafra extends AbstractBanco implements Banco{
 
 	@Override
 	public String getCodigoBeneficiarioFormatado(Beneficiario benef) {
-		return leftPadWithZeros(benef.getCodigoBeneficiario(),9);
+		return leftPadWithZeros(benef.getCodigoBeneficiario(),8) + benef.getDigitoCodigoBeneficiario();
 	}
 
 	@Override

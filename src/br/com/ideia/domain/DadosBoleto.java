@@ -64,6 +64,7 @@ public class DadosBoleto {
 	private String instrucao9; // Instrução do Sacado 9
 	private String instrucao10; // Instrução do Sacado 9
 	private String convenioBB; // Instrução do Sacado 9
+	private String parcela; // Instrução do Sacado 9
 
 	@Override
 	public String toString() {
@@ -594,6 +595,14 @@ public class DadosBoleto {
 
 	public void setCepBeneficiario(String cepBeneficiario) {
 		this.cepBeneficiario = cepBeneficiario;
+	}
+
+	public String getParcela() {
+		return parcela;
+	}
+
+	public void setParcela(String parcela) {
+		this.parcela = parcela;
 	}
 	
 	
